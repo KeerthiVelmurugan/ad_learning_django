@@ -26,3 +26,50 @@ jobs:
 
       - name: Run Django tests
         run: python manage.py test
+
+
+
+# name: Django CI
+
+# on: [push, pull_request]
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         env:
+#           MYSQL_ROOT_PASSWORD: root_password
+#           MYSQL_DATABASE: django_db
+#         ports:
+#           - 3306:3306
+#         options: >-
+#           --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -proot_password"
+#           --health-interval=10s
+#           --health-timeout=5s
+#           --health-retries=5
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Set up Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.12"
+
+#       - name: Install dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
+
+#       - name: Run Django tests
+#         env:
+#           DB_NAME: django_db
+#           DB_USER: root
+#           DB_PASSWORD: root_password
+#           DB_HOST: 127.0.0.1
+#           DB_PORT: 3306
+#         run: python manage.py test
